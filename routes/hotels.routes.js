@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const hotelsController = require('../controllers/hotels.controller');
 
-router.get('/',hotelsController.hotelGet);
-router.get('/bro',hotelsController.cityGet);
+router.get('/get',hotelsController.hotelGet);
+router.post('/addhotel',hotelsController.Post);
+router.delete('/del',hotelsController.del);
+router.get('city/:city',hotelsController.city);
 
 module.exports = router;

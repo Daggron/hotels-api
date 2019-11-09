@@ -25,6 +25,8 @@ db.on('error',()=>{
 
 app.use(cors());
 
+app.use(express.json());
+
 app.use(expressSession({
     secret : ' A keyboard cat',
     saveUninitialized:true,
