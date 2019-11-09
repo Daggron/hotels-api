@@ -20,7 +20,7 @@ db.once('open',()=>{
 });
 
 db.on('error',()=>{
-    console.log(`OOpsie there is an error`);
+    console.log(`OOpsie there is an error`+error);
 });
 
 app.use(cors());
@@ -28,7 +28,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(expressSession({
-    secret : ' A keyboard cat',
+    secret : 'Spider man Spider man tune churaya mere dil ka chain',
     saveUninitialized:true,
     resave:true,
 }));

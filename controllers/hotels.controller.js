@@ -21,10 +21,14 @@ exports.Post = async(req,res)=>{
     let hotel = new Hotels();
     hotel.name = req.body.name;
     hotel.city = req.body.city;
-    hotel.address.Street = req.body.street;
-    hotel.address.Pincode = req.body.Pincode;
+    hotel.address.Street = req.body.Street;
     hotel.contact.email = req.body.email;
     hotel.contact.phone = req.body.phone;
+    hotel.image = req.body.image;
+    hotel.rating = req.body.rating;
+    hotel.reviews = req.body.reviews;
+    hotel.Roomtype = req.body.Roomtype;
+    hotel.price = req.body.price;
 
     Hotels.create(
         hotel
@@ -38,14 +42,18 @@ exports.Post = async(req,res)=>{
 
 exports.del = async(req,res)=>{
     Hotels.deleteMany()
-    .then(res.json(`All claer`));
+    .then(res.json(`Thanos Just snapped two times and killed the entire universe`));
 }
 
 
 exports.city = async(req,res)=>{
-    Hotels.find({city:req.params.city})
+    const regex = new RegExp(escapeRegex(req.params.city), 'gi');
+    Hotels.find({city:regex})
     .then(data=>{
         return res.json(data);
+    })
+    .catch(err=>{
+        return res.json('oopsie there is an error'+err);
     })
 }
 
@@ -53,6 +61,17 @@ exports.city = async(req,res)=>{
 exports.getById = async (req,res)=>{
     let hotel = await Hotels.findById(req.params.id);
     return res.json(hotel);
+}
+
+exports.getByName = async (req,res)=>{
+    const regex = new RegExp(escapeRegex(req.params.name),'gi');
+    Hotels.find({name:regex})
+    .then(hotels=>{
+        return res.json(hotels);
+    })
+    .catch(err=>{
+        return res.status(401).json('Oopsie there is an error'+err);
+    });
 }
 
 

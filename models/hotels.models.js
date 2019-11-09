@@ -11,16 +11,10 @@ const schema = new mongoose.Schema({
         address:{
             Street:{
                 type:String,
-            },
-            Landmark:{
-                type:String,
-            },
-            Pincode:{
-                type:String,
             }
         },
-        images:{
-            type:Array,
+        image:{
+            type:String,
         },
         contact:{
             email:{
@@ -29,6 +23,18 @@ const schema = new mongoose.Schema({
             phone:{
                 type:String,
             }
+        },
+        rating:{
+            type:String,
+        },
+        reviews:{
+            type:String
+        },
+        price:{
+            type:String,
+        },
+        Roomtype:{
+            type:String
         }
     
     
