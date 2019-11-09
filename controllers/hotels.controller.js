@@ -1,4 +1,5 @@
 const Hotels = require('../models/hotels.models');
+
 exports.hotelGet = async (req,res)=>{
        Hotels.find()
        .then(hotels=>{
@@ -25,14 +26,26 @@ exports.Post = async(req,res)=>{
     })
 }
 
+
 exports.del = async(req,res)=>{
     Hotels.deleteMany()
     .then(res.json(`All claer`));
 }
+
 
 exports.city = async(req,res)=>{
     Hotels.find({city:req.params.city})
     .then(data=>{
         return res.json(data);
     })
+}
+
+
+exports.getById = async (req,res)=>{
+    let hotel = await Hotels.findById(req.params.id);
+    return res.json(hotel);
+}
+
+exports.fuzzrSearch = async(req,res)=>{
+    
 }
