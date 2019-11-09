@@ -1,10 +1,19 @@
 const Hotels = require('../models/hotels.models');
 
 exports.hotelGet = async (req,res)=>{
-       Hotels.find()
-       .then(hotels=>{
-           res.json(hotels);
-       });
+    if (req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        console.log(req.query.search);
+        let foundHotels = await Hotels.find({'city':regex});
+        if (foundHotels.length === 0){
+            foundHotels = await Hotels.find({'name':regex});
+        }
+        res.json(foundHotels);
+     }
+     else{
+            let hotelsFound = await Hotels.find();
+            res.json(hotelsFound);
+     }
 }
 
 
@@ -46,6 +55,9 @@ exports.getById = async (req,res)=>{
     return res.json(hotel);
 }
 
-exports.fuzzrSearch = async(req,res)=>{
-    
-}
+
+
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
